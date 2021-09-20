@@ -3,20 +3,25 @@
 const { Client, Intents } = require('discord.js')
 const {
   generateDependencyReport,
+  AudioPlayer,
   AudioPlayerStatus,
   AudioResource,
+  createAudioPlayer,
   entersState,
   joinVoiceChannel,
   VoiceConnection,
   VoiceConnectionStatus,
+  createAudioResource,
 } = require('@discordjs/voice')
 
+let newAudio = new AudioPlayer()
 const EventHandler = require('./EventHandler')
 
 class BombaBot {
   client
   eventHandler
   voiceChannelConnection
+  audioPlayer
 
   constructor() {
     console.log('I have been created!!!!')
@@ -50,7 +55,12 @@ class BombaBot {
       selfDeaf: false,
       selfMute: false,
     })
-    console.log(this.voiceChannelConnection)
+    // .console.log(this.voiceChannelConnection)
+    this.audioPlayer = createAudioPlayer()
+    let resource = createAudioResource('./audioFiles/vbrazil.mp3')
+    newAudio.subscribe(this.voiceChannelConnection)
+    newAudio.play(resource)
+    console.log(this.audioPlayer)
   }
 }
 
