@@ -14,22 +14,25 @@ const {
   createAudioResource,
 } = require('@discordjs/voice')
 
-let newAudio = new AudioPlayer()
 const EventHandler = require('./EventHandler')
+const AudioHandler = require('./AudioHandler')
 
 class BombaBot {
   client
   eventHandler
   voiceChannelConnection
   audioPlayer
+  audioHandler
 
   constructor() {
     console.log('I have been created!!!!')
+    this.audioPlayer = new AudioPlayer()
+    this.audioHandler = new AudioHandler(this.voiceChannelConnection)
   }
 
   login() {
     this.client = new Client({
-      intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILDS],
+      intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES],
     })
     this.client.login(process.env.TOKEN)
   }
@@ -48,6 +51,7 @@ class BombaBot {
   async joinChannel(channelDetails) {
     //console.log('trying to join ' + channel)
     // joinVoiceChannel()
+
     this.voiceChannelConnection = joinVoiceChannel({
       channelId: channelDetails.id,
       guildId: channelDetails.guild.id,
@@ -55,30 +59,12 @@ class BombaBot {
       selfDeaf: false,
       selfMute: false,
     })
-    // .console.log(this.voiceChannelConnection)
-    this.audioPlayer = createAudioPlayer()
-    let resource = createAudioResource('./audioFiles/vbrazil.mp3')
-    newAudio.subscribe(this.voiceChannelConnection)
-    newAudio.play(resource)
-    console.log(this.audioPlayer)
+
+    // this.audioPlayer = createAudioPlayer()
+    this.audioHandler.setVoiceChannelConnection(this.voiceChannelConnection)
+    this.audioHandler.playAudioFromFileName()
+    // console.log(this.audioPlayer)
   }
 }
-
-// const BombaBot = {
-//   client: undefined,
-
-//   login: () => {
-//     console.log(process.env.TOKEN)
-//     this.client.login(process.env.TOKEN)
-//   },
-
-//   init: () => {
-//     this.client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] })
-//
-//       console.log(this)
-//       login(process.env.TOKEN)
-//
-//   },
-// }
 
 module.exports = BombaBot

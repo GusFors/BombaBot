@@ -2,18 +2,18 @@ const prefix = '!b'
 
 class EventHandler {
   client
-  subscribers
+  bombaSubscribers
 
   constructor(client, options) {
     console.log('EventHandler created')
     this.client = client
     this.startEventListener()
     this.setOptions()
-    this.subscribers = []
+    this.bombaSubscribers = []
   }
 
   addSubscriber(subscriber) {
-    this.subscribers.push(subscriber)
+    this.bombaSubscribers.push(subscriber)
   }
 
   startEventListener() {
@@ -36,18 +36,13 @@ class EventHandler {
     console.log(message.member.voice.channel)
 
     if (cleanCommand === 'join') {
-      this.subscribers.forEach((sub) => {
+      this.bombaSubscribers.forEach((bombaSub) => {
         console.log('should join')
         //console.log(message.member.voice.channel)
-        sub.joinChannel(message.member.voice.channel)
+        bombaSub.joinChannel(message.member.voice.channel)
 
         //sub.joinChannel(await message.member.voice.channel)
       })
-
-      // connection = await message.member.voice.channel.join()
-      // isConnectedToVoiceChannel = true
-      // dispatcher = connection.play('./audioFiles/vbrazil.mp3')
-      // dispatcher.setVolume(currentVolume)
     }
 
     //message.reply('0w0')
