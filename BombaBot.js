@@ -65,6 +65,10 @@ class BombaBot {
     this.audioHandler.playAudioFromFileName('./audioFiles/vbrazil.mp3')
     // console.log(this.audioPlayer)
   }
+
+  forwardAudioRequest(audio) {
+    this.audioHandler.playAudioFromStream(audio)
+  }
 }
 
 module.exports = BombaBot

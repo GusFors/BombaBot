@@ -13,6 +13,8 @@ const {
   createAudioResource,
 } = require('@discordjs/voice')
 
+const ytdl = require('ytdl-core-discord')
+
 class AudioHandler {
   audioPlayer
   voiceChannelConnection
@@ -29,6 +31,13 @@ class AudioHandler {
 
   playAudioFromFileName(audioFileName) {
     let resource = createAudioResource(audioFileName)
+    this.audioPlayer.subscribe(this.voiceChannelConnection)
+    this.audioPlayer.play(resource)
+  }
+
+  playAudioFromStream(audioStream) {
+    console.log(audioStream)
+    let resource = createAudioResource(audioStream)
     this.audioPlayer.subscribe(this.voiceChannelConnection)
     this.audioPlayer.play(resource)
   }
