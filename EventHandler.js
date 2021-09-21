@@ -33,7 +33,7 @@ class EventHandler {
     }
 
     let cleanCommand = message.cleanContent.split(' ')[1].trim() ? message.cleanContent.split(' ')[1].trim() : false
-    console.log(message.member.voice.channel)
+    // console.log(message.member.voice.channel)
 
     if (cleanCommand === 'join') {
       this.bombaSubscribers.forEach((bombaSub) => {

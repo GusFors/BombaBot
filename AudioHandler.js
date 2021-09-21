@@ -28,7 +28,7 @@ class AudioHandler {
   }
 
   playAudioFromFileName(audioFileName) {
-    let resource = createAudioResource('./audioFiles/vbrazil.mp3')
+    let resource = createAudioResource(audioFileName)
     this.audioPlayer.subscribe(this.voiceChannelConnection)
     this.audioPlayer.play(resource)
   }

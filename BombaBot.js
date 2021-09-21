@@ -62,7 +62,7 @@ class BombaBot {
 
     // this.audioPlayer = createAudioPlayer()
     this.audioHandler.setVoiceChannelConnection(this.voiceChannelConnection)
-    this.audioHandler.playAudioFromFileName()
+    this.audioHandler.playAudioFromFileName('./audioFiles/vbrazil.mp3')
     // console.log(this.audioPlayer)
   }
 }
