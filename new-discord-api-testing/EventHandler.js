@@ -64,8 +64,6 @@ class EventHandler {
         console.log('not valid url')
       }
     }
-
-    //message.reply('0w0')
   }
 
   onVoiceStateUpdate(oldState, newState) {
